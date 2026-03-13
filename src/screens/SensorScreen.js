@@ -9,6 +9,13 @@ export default function SensorScreen() {
         z: 0,
     });
 
+    //RETO 2: SENSOR DE MOVIMIENTO
+    //detección de movimiento
+    const isMoving =
+        Math.abs(data.x) > 1 ||
+        Math.abs(data.y) > 1 ||
+        Math.abs(data.z) > 1;
+
     useEffect(() => {
         Accelerometer.setUpdateInterval(500);
 
@@ -43,6 +50,13 @@ export default function SensorScreen() {
                 <Text style={styles.label}>Eje Z</Text>
                 <Text style={styles.value}>
                     {data.z.toFixed(3)}
+                </Text>
+            </View>
+            {/*Agregamos otro view para mostrar si el dispositivo está o no en movimiento*/}
+            <View style={styles.card}>
+                <Text style={styles.label}>Estado del dispositivo</Text>
+                <Text style={styles.value}>
+                    {isMoving ? "Dispositivo en movimiento" : "Dispositivo estable"}
                 </Text>
             </View>
         </View >
